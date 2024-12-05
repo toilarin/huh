@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miku Channel</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+<style>
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: absolute;
+  z-index: -1;
+}
+.red {
+  background-color: red;
+  top: -50px;
+  left: -50px;
+}
+.purple {
+  background-color: purple;
+  bottom: -50px;
+  right: -50px;
+}
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.buttons button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttons button:hover {
+  background-color: #0056b3;
+}
+/* Thêm các phần khác nếu cần */
+</style>
+</head>
+<body>
+<div class="circle red"></div>
+<div class="circle purple"></div>
+<div class="container">
+  <img alt="Miku Store logo with a cute character and the text 'Miku Store'" height="100" src="https://storage.googleapis.com/a1aa/image/5UFHlu9nfE30CCfPSrwMfpBeexC90bYetDntjaIZ5fuvbeh3TA.jpg" width="100"/>
+  <h1>Miku Channel</h1>
+  <p>#Discord Nitro Random</p>
+
+  <!-- Hiển thị HWID -->
+  <div id="hwid-container">
+    <p>Your HWID: <span id="hwid">{{ hwid }}</span></p>
+  </div>
+
+  <div class="buttons">
+    <button id="code-here-button">Code Here</button>
+    <button id="generate-key-button">Generate Key</button>
+  </div>
+
+  <p id="api-key"></p>
+
+  <audio controls="">
+    <source src="audio-file.mp3" type="audio/mpeg"/>
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+document.getElementById('code-here-button').addEventListener('click', function() {
+  const hwidElement = document.getElementById('hwid');
+  if (!hwidElement.textContent) {
+    alert('Bạn cần phải vượt qua link để nhận được HWID trước!');
+  } else {
+    alert('Chúc mừng! Bạn đã vượt qua link.');
+    // You can add more actions here
+  }
+});
+
+document.getElementById('generate-key-button').addEventListener('click', function() {
+  const hwidElement = document.getElementById('hwid').textContent;
+  const apiKeyElement = document.getElementById('api-key');
+  if (!apiKeyElement.textContent && hwidElement) {
+    const key = 'RinKey-' + Math.random().toString(36).substring(2, 10);
+    apiKeyElement.textContent = `Your API key is: ${key}`;
+  } else if (!hwidElement) {
+    alert('HWID không hợp lệ. Vui lòng tạo HWID mới.');
+  } else {
+    alert('Bạn đã tạo key rồi!');
+  }
+});
+
+// Lấy HWID từ tham số URL và hiển thị
+const urlParams = new URLSearchParams(window.location.search);
+const hwid = urlParams.get('hwid');
+if (hwid) {
+  document.getElementById('hwid').textContent = hwid;
+}
+</script>
+</body>
+</html>
